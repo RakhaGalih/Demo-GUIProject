@@ -31,9 +31,15 @@ public class BookTableGUI extends JFrame {
 
     public BookTableGUI() {
         setTitle("Book Table");
-        setSize(600, 400);
+        setSize(800, 400); // Lebar frame ditambah agar ada ruang untuk sidebar
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Tambahkan sidebar
+        JPanel sidebarPanel = new JPanel(new GridLayout(2, 0));
+        sidebarPanel.setPreferredSize(new Dimension(200, getHeight()));
+        sidebarPanel.setBackground(Color.LIGHT_GRAY);
+        add(sidebarPanel, BorderLayout.WEST);
+        
         // Model tabel
         model = DatabaseConnection.fetchDataTabelBuku();
 
@@ -173,6 +179,12 @@ public class BookTableGUI extends JFrame {
         buttonPanel.add(editButton);
         buttonPanel.add(deleteButton);
         add(buttonPanel, BorderLayout.SOUTH);
+
+        // Tambahkan tombol-tombol di sidebar
+        JButton sidebarButton1 = new JButton("Sidebar Button 1");
+        JButton sidebarButton2 = new JButton("Sidebar Button 2");
+        sidebarPanel.add(sidebarButton1);
+        sidebarPanel.add(sidebarButton2);
 
         setVisible(true);
     }

@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class RegistrationForm extends JFrame {
+
     private JTextField usernameField;
     private JPasswordField passwordField;
     private JTextField nameField;
@@ -93,7 +94,7 @@ public class RegistrationForm extends JFrame {
                 register(username, password, name, address, dob, contact);
             }
         });
-        
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -101,11 +102,11 @@ public class RegistrationForm extends JFrame {
                 openSignInForm(); // Open the registration form
             }
         });
-        
 
         getContentPane().add(panelMain, BorderLayout.CENTER);
     }
-     // Metode untuk mengonversi string menjadi objek Date
+    // Metode untuk mengonversi string menjadi objek Date
+
     private Date getDateFromString(String dateString) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -115,27 +116,25 @@ public class RegistrationForm extends JFrame {
             return null;
         }
     }
-    
+
     private void openSignInForm() {
         SignInForm signInForm = new SignInForm();
         signInForm.setVisible(true);
         this.setVisible(false);
     }
 
-
     private void register(String username, String password, String name, String address, Date dob, String contact) {
         // Implementation of registration process
         try {
-        DatabaseConnection.registerUser(username, password, name, address, dob, contact);
-        } catch (Exception e){
+            DatabaseConnection.registerUser(username, password, name, address, dob, contact);
+            JOptionPane.showMessageDialog(this, "Registration successful!");
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Registration failed! Because " + e);
         }
-        JOptionPane.showMessageDialog(this, "Registration successful!");
+
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(RegistrationForm::new);
     }
 }
-
-

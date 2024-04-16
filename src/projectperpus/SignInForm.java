@@ -79,7 +79,17 @@ public class SignInForm extends JFrame {
 
     private void signIn(String username, String password) {
         // Implementation of sign in process
-        DatabaseConnection.signIn(username, password);
+        try {
+            JOptionPane.showMessageDialog(this, "Sign in successful!");
+            if (DatabaseConnection.signIn(username, password)){
+                BookTableGUI gui = new BookTableGUI();
+                gui.setVisible(true);
+                this.setVisible(false);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Sign in failed! Because " + e);
+        }
+        
     }
 
     private void openRegistrationForm() {
